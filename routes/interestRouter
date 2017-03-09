@@ -1,8 +1,0 @@
-var express = require('express');
-var router = express.Router();
-
-var interestController = require('../controllers/interestController');
-
-router.get('/interest', interestController.getCustomerInterestList);
-
-module.exports = router;

@@ -4,28 +4,32 @@ module.exports = {
     // Get all customers who have expressed an interest
     getCustomerInterestList: function (req, res, next) {
         interestDAO.getListFromDatabase(function (interestResult) {
-            res.send(interestResult);
+            res.status(200).send(interestResult);
         });
     },
 
     // Get count of customers who have expressed an interest
     getCustomerInterestCount: function (req, res, next) {
         interestDAO.getCountFromDatabase(function (count) {
-            res.send(JSON.stringify({count: count}));
+            res.status(200).send(JSON.stringify({count: count}));
         })
     },
 
     // Add a new customer who has expressed an interest
     postCustomerInterestList: function(req, res, next) {
-        var firstName = req.query.firstName;
-        var lastName = req.query.lastName;
-        var dob = req.query.dob;
-        var address = req.query.address;
-        var interest = req.query.interest;
-        var interestReason = req.query.interestReason;
+        var firstName = req.body.firstName;
+        var lastName = req.body.lastName;
+        var dob = req.body.dob;
+        var address = req.body.address;
+        var interest = req.body.interest;
+        var interestReason = req.body.interestReason;
 
-        interestDAO.insertIntoDatabase(firstName, lastName, dob, address, interest, interestReason, function () {
-            res.sendStatus(200);
-        });
+        if(!firstName || !lastName || !dob || !address || !interest) {
+            res.sendStatus(500);
+        } else {
+            interestDAO.insertIntoDatabase(firstName, lastName, dob, address, interest, interestReason, function () {
+                res.sendStatus(200);
+            });
+        }
     }
 };

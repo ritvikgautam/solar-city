@@ -13,4 +13,9 @@ router.get('/interest', interestController.getCustomerInterestList);
 router.get('/interestCount', interestController.getCustomerInterestCount);
 router.post('/interest', interestController.postCustomerInterestList);
 
+// Handle 404
+router.get('*', function (req, res, next) {
+   res.sendStatus(404);
+});
+
 module.exports = router;

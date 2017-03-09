@@ -35,6 +35,8 @@ module.exports = {
                 })
             }
             callback(JSON.stringify(interestResult));
+        }).catch(function (err) {
+            res.sendStatus(500);
         });
     },
 
@@ -43,6 +45,8 @@ module.exports = {
             interest: true
         }}).then(function (response) {
             callback(response);
+        }).catch(function (err) {
+            res.sendStatus(500);
         })
     },
 
@@ -59,6 +63,8 @@ module.exports = {
             }).then(function (interest) {
                 user.setInterest(interest);
                 callback();
+            }).catch(function (err) {
+                res.sendStatus(500);
             })
         });
     }

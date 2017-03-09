@@ -1,0 +1,37 @@
+language: node_js
+
+node_js:
+  - 6.70
+
+services:
+  - mysql
+
+env:
+  global:
+    - APP_NAME=solar-city
+    - IS_SHIPPABLE=true
+    - CLEARDB_DATABASE_URL=mysql://shippable@127.0.0.1:3306/test
+    - XUNIT_FILE=shippable/testresults/result.xml
+
+before_script:
+  - mkdir -p shippable/testresults
+  - mkdir -p shippable/codecoverage
+  - mysql -e 'drop database if exists test;'
+  - mysql -e 'create database if not exists test;'
+  - mysql -e 'create table if not exists test.annoucement (id int(11) NOT NULL AUTO_INCREMENT, `content` varchar(255), author varchar(255), postedAt varchar(255), createdAt datetime, updatedAt datetime, PRIMARY KEY (id));'
+  - mysql -e 'create table if not exists test.privatechat (id int(11) NOT NULL AUTO_INCREMENT, `content` varchar(255), author varchar(255), receiver varchar(255), postedAt varchar(255), createdAt datetime, updatedAt datetime, PRIMARY KEY (id));'
+  - mysql -e 'create table if not exists test.publicchat (id int(11) NOT NULL AUTO_INCREMENT, `content` varchar(255), author varchar(255), postedAt varchar(255), createdAt datetime, updatedAt datetime, PRIMARY KEY (id));'
+  - mysql -e 'create table if not exists test.statuscrumb (id int(11) NOT NULL AUTO_INCREMENT, username varchar(255), statusCode varchar(255), lastChangeMadeAt varchar(255), createdAt datetime, updatedAt datetime, PRIMARY KEY (id));'
+  - mysql -e 'create table if not exists test.user (id int(11) NOT NULL AUTO_INCREMENT, username varchar(255), password varchar(255), lastLoginAt char(255), lastStatusCode varchar(255), lastChangeMadeAt varchar(255), accountStatus varchar(255), firstName varchar(255), lastName varchar(255), gender varchar(255), dob varchar(255), online varchar(255), privilege varchar(255), createdAt datetime, updatedAt datetime, PRIMARY KEY (id));'
+  - mysql -e 'create table if not exists test.shelter (id int(11) NOT NULL AUTO_INCREMENT, `name` varchar(255), lat varchar(255), lng char(255), phone varchar(255), email varchar(255), PRIMARY KEY (id));'
+build:
+  ci:
+    - npm install
+    - node index.js &
+    - grunt test
+
+after_success:
+  - git push -f git@heroku.com:$APP_NAME.git master
+
+notifications:
+   email: false

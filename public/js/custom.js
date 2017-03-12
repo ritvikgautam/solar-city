@@ -1,4 +1,4 @@
-const url = "http://solar-city.herokuapp.com";
+const url = "https://solar-city.herokuapp.com";
 // const url = "http://localhost:3000";
 
 $(function() {

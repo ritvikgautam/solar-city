@@ -64,7 +64,7 @@ module.exports = {
                 user.setInterest(interest);
                 callback();
             }).catch(function (err) {
-                res.sendStatus(500);
+                console.log("Error entering values to the Interest database!");
             })
         });
     }

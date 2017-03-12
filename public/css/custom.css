@@ -1,0 +1,36 @@
+* {
+    font-family: 'Slabo 27px', serif;
+    margin: 10px;
+    font-size: 1vmax;
+}
+
+.count {
+    font-size: 1.5em;
+    text-align: center;
+    margin: 2%;
+}
+
+#countNum {
+    font-size: 2em;
+    color: green;
+}
+
+.form {
+    font-size: 1.2em;
+    text-align: center;
+    display: block;
+    overflow: inherit;
+    margin-top: 1%;
+}
+
+input {
+    padding: 1%;
+    margin: 1%;
+    width: 80%;
+}
+
+textarea {
+    padding:1%;
+    margin: 1%;
+    width: 80%;
+}

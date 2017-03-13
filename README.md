@@ -32,7 +32,8 @@ Note: There is no boilerplate code used.
 ## Future Work
 
 - There are no test cases for the front end. 
-- The front end is written in JQuery. Using a framework like Angular or React will make it more maintainable. 
+- The front end is written in JQuery. Using a framework like Angular or React will make it more maintainable.
+- Add an admin panel that could see all users who have expressed an interest in solar panels. 
 
 ## Local Installation
 

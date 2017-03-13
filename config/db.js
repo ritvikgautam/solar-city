@@ -1,9 +1,7 @@
 var Sequelize = require('sequelize');
 var config;
 
-if(process.env.IS_SHIPPABLE) {
-    config = require('./dbConfigShippable.json');
-} else if(process.env.WEB_CONCURRENCY) {
+if(process.env.WEB_CONCURRENCY) {
     config = require('./dbConfigHeroku.json')
 } else {
     config = require('./dbConfig.json')
